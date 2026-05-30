@@ -3,4 +3,19 @@
 
 extern double theta;
 
+///////////////////////////////// structs /////////////////////////////////
+
+typedef struct coord_3d {
+	double x;
+	double y;
+	double z;
+} coord_3d;
+
+typedef struct coord_2d {
+	double x;
+	double y;
+} coord_2d;
+
+///////////////////////////////// structs /////////////////////////////////
+
 #endif

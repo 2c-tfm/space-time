@@ -83,6 +83,16 @@ void draw_space(){
 		.y = 0.1f,
 		.z = 0.1f
 	};
+	object *obj_it = objs;
+	printf("basic object %p %p\n",(void *) obj_it, (void *)obj_it->next);
+
+	// iterating over objects to draw
+	while (obj_it != NULL) {
+		coord_2d proj = orthographic_projection(&obj_it->coords);
+		Vector2 cords = {proj.x, proj.y};
+		DrawCircleGradient(cords, obj_it->radius * focal_length, ORANGE, SKYBLUE);
+		obj_it = obj_it->next;
+	}
 
 	while (init.x < 10) {
 		init.y = 0.1f;
@@ -97,4 +107,5 @@ void draw_space(){
 		}
 		init.x++;
 	}
+
 }
