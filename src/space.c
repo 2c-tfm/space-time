@@ -1,11 +1,9 @@
 #include <space_time.h>
 
-double focal_length = 5;
+double focal_length = 60;
 Vector2 cameraOffset = {0, 0};
 double theta ;
-double alpha = 45;
-
-
+double alpha =  M_PI / 4.0;
 
 // orthographic_projection - projects a 3d point onto a 2d plane
 static coord_2d orthographic_projection(coord_3d *coord) {
@@ -27,85 +25,53 @@ static coord_2d orthographic_projection(coord_3d *coord) {
 	return (proj);
 }
 
-static void handle_zoom(void) {
-	focal_length += GetMouseWheelMove() * 10;
-	if (focal_length < 0.1f) 
-		focal_length = 0.1f;
-}
-
-static void handle_drag(void){
-	static bool dragging = false;
-	static Vector2 prevMousePos = {0, 0};
-	static Vector2 dragDelta = {0, 0};
-
-	Vector2 mousePos = GetMousePosition();
-
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-		dragging = true;
-		prevMousePos = mousePos;
-        }
-
-        if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-		dragging = false;
-		dragDelta = (Vector2){0, 0};
-        }
-
-        if (dragging && IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-		cameraOffset.y += (mousePos.y - prevMousePos.y) * 0.5;
-		cameraOffset.x += (mousePos.x - prevMousePos.x) * 0.5;
-		prevMousePos = mousePos;
-        }
-
-
-        if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
-		dragging = true;
-		prevMousePos = mousePos;
-        }
-
-        if (IsMouseButtonReleased(MOUSE_BUTTON_RIGHT)) {
-		dragging = false;
-		dragDelta = (Vector2){0, 0};
-        }
-
-        if (dragging && IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
-		theta += (mousePos.y - prevMousePos.y) * 0.01;
-		alpha += (mousePos.x - prevMousePos.x) * 0.01;
-		prevMousePos = mousePos;
-        }
-}
-
-void draw_space(){
-	handle_zoom();
-	handle_drag();
-
-	coord_3d init = {
-		.x = 0.1f, 
-		.y = 0.1f,
-		.z = 0.1f
-	};
+void draw_objects(void){
 	object *obj_it = objs;
-	printf("basic object %p %p\n",(void *) obj_it, (void *)obj_it->next);
+
+
 
 	// iterating over objects to draw
 	while (obj_it != NULL) {
 		coord_2d proj = orthographic_projection(&obj_it->coords);
 		Vector2 cords = {proj.x, proj.y};
-		DrawCircleGradient(cords, obj_it->radius * focal_length, ORANGE, SKYBLUE);
+		DrawText(obj_it->name, proj.x - obj_it->radius * (focal_length * 1.2),
+				proj.y - obj_it->radius * focal_length -3, (-2 * focal_length),
+				LIGHTGRAY);
+		DrawCircleGradient(cords, obj_it->radius * (focal_length * 0.2), obj_it->colors[0], obj_it->colors[1]);
 		obj_it = obj_it->next;
 	}
 
-	while (init.x < 10) {
-		init.y = 0.1f;
-		while (init.y < 10) {
-			init.z = 0.1f;
-			while (init.z < 10){
-				coord_2d proj = orthographic_projection(&init);
-				DrawCircle(proj.x, proj.y, 1.0, LIGHTGRAY);
-				init.z += 1;
+}
+
+
+void draw_space(void){
+	coord_3d init;
+	coord_2d proj;
+	coord_3d *pgrav = MemAlloc(sizeof(coord_3d));
+	uint32_t screen_range = fmax(WIN_X, WIN_Y) / focal_length;
+
+	memset(&init, 0, sizeof(coord_3d));		// initializing vals
+	memset(&proj, 0, sizeof(coord_2d));		// initializing vals
+	init.x = 0.00001f;
+	
+
+	while (init.x < screen_range) {
+		init.y = 0.00001f;
+		while (init.y < screen_range) {
+			init.z = 0.00001f;
+			while (init.z < screen_range){
+				memcpy(pgrav, &init, sizeof(coord_3d));
+
+				apply_gravity_all_objs(pgrav);
+
+				proj = orthographic_projection(pgrav);
+				DrawPixel(proj.x, proj.y, LIGHTGRAY);
+				init.z++;
 			}
-			init.y += 1;
+			init.y++;
 		}
 		init.x++;
 	}
-
+	MemFree(pgrav);
+	
 }

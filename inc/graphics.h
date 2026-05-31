@@ -7,4 +7,6 @@
 
 //////////////////////////////// definitions ///////////////////////////////
 
+void render_frame(void);	// initial loop to render frames
+				//
 #endif

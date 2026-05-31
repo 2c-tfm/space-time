@@ -2,9 +2,14 @@
 #define SPACE_TIME_H
 /////////////////////////////////// TODO ///////////////////////////////////
 /// [X] - simulate space 
-/// [ ] - create objects 
-////// [ ] - draw objects on the plane
-/// [ ] - simulate gravity warp in space
+/// [X] - create objects 
+////// [X] - draw objects on the plane
+/// [X] - simulate gravity warp in space
+/// [X] - fix that anoying segv
+/// [X] - fix the space warp 
+/// [ ] - apply gravity on masses
+/// [ ] - apply an orbit
+/// [ ] - find out how to create unlimited space fabric
 /////////////////////////////////// TODO ///////////////////////////////////
 
 ///////////////////////////////// includes /////////////////////////////////
@@ -15,11 +20,13 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <raylib.h>
+#include <string.h>
 
 
-#include "graphics.h"
 #include "space.h"
 #include "object.h"
+#include "graphics.h"
+#include "gravity.h"
 ///////////////////////////////// includes /////////////////////////////////
 
 
@@ -32,13 +39,13 @@
 //////////////////////////////// definitions ///////////////////////////////
 
 ///////////////////////////////// functions ////////////////////////////////
-/// graphics.c
-void render_frame(void);	// initial loop to render frames
-/// space.c
-void init_space_coords(void);	// inits our space coords in ``
-void draw_space(void);
+// mouse controls
+void handle_drag(void);
+void handle_zoom(void);
 ///////////////////////////////// functions ////////////////////////////////
 
-extern int32_t ***space_coords;
+extern double focal_length;
+extern Vector2 cameraOffset;
+extern double alpha;
 
 #endif

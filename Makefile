@@ -3,8 +3,8 @@ GFLAGS = -framework Cocoa -framework IOKit -framework CoreVideo -framework OpenG
 CC = gcc
 NAME = space_time
 RAYLIB = libs/raylib/src/libraylib.a
-OBJ = build/main.o build/graphics.o build/space.o build/object.o
-SRC = src/main.c src/graphics.c src/space.c build/object.c
+OBJ = build/main.o build/graphics.o build/space.o build/object.o build/mouse.o build/gravity.o
+SRC = src/main.c src/graphics.c src/space.c build/object.c src/mouse.c src/gravity.c
 
 LOCAL_INC = inc/
 INC_DIR = libs/raylib/src

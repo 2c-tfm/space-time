@@ -18,4 +18,8 @@ typedef struct coord_2d {
 
 ///////////////////////////////// structs /////////////////////////////////
 
+
+void draw_objects(void);
+void draw_space(void);
+
 #endif
