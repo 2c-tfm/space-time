@@ -5,6 +5,7 @@ void info(){
 }
 
 void render_frame(void){
+	calc_all_objs_gforce();
 	while(!WindowShouldClose()){
 		BeginDrawing();
 		ClearBackground(BLACK);

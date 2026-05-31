@@ -7,9 +7,11 @@
 /// [X] - simulate gravity warp in space
 /// [X] - fix that anoying segv
 /// [X] - fix the space warp 
-/// [ ] - apply gravity on masses
-/// [ ] - apply an orbit
-/// [ ] - find out how to create unlimited space fabric
+/// [x] - apply gravity on masses
+/// [x] - apply an orbit
+/// [x] - find out how to create unlimited space fabric
+/// [ ] - allow planets from a json file
+/// [ ] - init their velocity 
 /////////////////////////////////// TODO ///////////////////////////////////
 
 ///////////////////////////////// includes /////////////////////////////////

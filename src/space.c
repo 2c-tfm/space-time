@@ -28,16 +28,21 @@ static coord_2d orthographic_projection(coord_3d *coord) {
 void draw_objects(void){
 	object *obj_it = objs;
 
-
+	calc_all_objs_gforce();
+	obj_update_coords_via_accel();
 
 	// iterating over objects to draw
 	while (obj_it != NULL) {
 		coord_2d proj = orthographic_projection(&obj_it->coords);
 		Vector2 cords = {proj.x, proj.y};
-		DrawText(obj_it->name, proj.x - obj_it->radius * (focal_length * 1.2),
-				proj.y - obj_it->radius * focal_length -3, (-2 * focal_length),
-				LIGHTGRAY);
-		DrawCircleGradient(cords, obj_it->radius * (focal_length * 0.2), obj_it->colors[0], obj_it->colors[1]);
+		DrawText(obj_it->name, proj.x - obj_it->radius * 
+				(focal_length * 1.2),proj.y - obj_it->radius
+				* focal_length -3,(-2 * focal_length), LIGHTGRAY);
+		DrawCircleGradient(cords, obj_it->radius * (focal_length * 0.2),
+				obj_it->colors[0], obj_it->colors[1]);
+		printf("object [%s] px %lf py %lf pz %lf\n", obj_it->name,
+				obj_it->coords.x, obj_it->coords.y,
+				obj_it->coords.z);
 		obj_it = obj_it->next;
 	}
 
@@ -54,15 +59,15 @@ void draw_space(void){
 	memset(&proj, 0, sizeof(coord_2d));		// initializing vals
 	init.x = 0.00001f;
 	
-
-	while (init.x < screen_range) {
+	(void) screen_range;
+	while (init.x < 40) {
 		init.y = 0.00001f;
-		while (init.y < screen_range) {
+		while (init.y < 40) {
 			init.z = 0.00001f;
-			while (init.z < screen_range){
+			while (init.z < 40){
 				memcpy(pgrav, &init, sizeof(coord_3d));
 
-				apply_gravity_all_objs(pgrav);
+				apply_gravity_on_space(pgrav);
 
 				proj = orthographic_projection(pgrav);
 				DrawPixel(proj.x, proj.y, LIGHTGRAY);

@@ -1,9 +1,8 @@
 #include <space_time.h>
 
 void handle_zoom(void) {
-	printf("focal length %lf\n", focal_length);
-	if (focal_length < 20 && GetMouseWheelMove() < 0.0f)
-		return;
+	// if (focal_length < 20 && GetMouseWheelMove() < 0.0f)
+	// 	return;
 	focal_length += GetMouseWheelMove() * 10;
 	if (focal_length < 0.1f) 
 		focal_length = 0.1f;
