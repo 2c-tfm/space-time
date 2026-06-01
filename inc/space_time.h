@@ -12,9 +12,12 @@
 /// [x] - find out how to create unlimited space fabric
 /// [x] - allow planets from a json file
 /// [x] - init their velocity 
+/// [X] - adding a trail for objects 
+/// [ ] - shine light wave (using mouse)
+////// [ ] - replace camera dragging control controls (SHIFT + mouse drag) instead of (mouse drag)
 /// [ ] - electro magnetic field of a planet
-/// [ ] - shine light wave
 /// [ ] - maybe emulate a star???/
+/// [ ] - add a menu for instructions
 /////////////////////////////////// TODO ///////////////////////////////////
 
 ///////////////////////////////// includes /////////////////////////////////

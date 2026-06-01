@@ -16,11 +16,25 @@
 		},
 		{
 			"name": "mars",
-			"mass": 1000,
+			"mass": 4000,
 			"radius": 7,
 			"coords": { "x": 40, "y": 40, "z": 40 },
 			"colors": [ "RED", "ORANGE"],
 			"secondaries": ["phobos", "deimos"]
+		},
+		{
+			"name": "earth",
+			"mass": 1000,
+			"radius": 5,
+			"coords": { "x": 60, "y": 0, "z": 0 },
+			"colors": [ "BLUE", "SKYBLUE" ]
+		},
+		{
+			"name": "Chicxulub crater",
+			"mass": 300,
+			"radius": 1.4,
+			"coords": { "x": 40, "y": 0, "z": 0 },
+			"colors": [ "DARKGRAY", "GRAY" ]
 		}
 	]
 }

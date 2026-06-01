@@ -1,5 +1,7 @@
 #include <space_time.h>
 
+bool trail = true;
+
 double focal_length = 60;
 Vector2 cameraOffset = {0, 0};
 double theta ;
@@ -25,6 +27,33 @@ static coord_2d orthographic_projection(coord_3d *coord) {
 	return (proj);
 }
 
+static void draw_obj_trail(object *target){
+	object *trg_trail = MemAlloc(sizeof(object));
+	struct Color trail_temp = RED;
+	uint32_t i = 0;
+
+	memcpy(trg_trail, target, sizeof(object));
+	while (i < TRAIL_LEN){
+		trg_trail->velocity.x -= trg_trail->acceleration.x * PHYSICS_DT;
+		trg_trail->velocity.y -= trg_trail->acceleration.y * PHYSICS_DT;
+		trg_trail->velocity.z -= trg_trail->acceleration.z * PHYSICS_DT;
+
+		trg_trail->coords.x -= trg_trail->velocity.x * PHYSICS_DT;
+		trg_trail->coords.y -= trg_trail->velocity.y * PHYSICS_DT;
+		trg_trail->coords.z -= trg_trail->velocity.z * PHYSICS_DT;
+
+		coord_2d trail_proj = orthographic_projection(&trg_trail->coords);
+		
+		DrawPixel(trail_proj.x, trail_proj.y, trail_temp);
+
+		if (trail_temp.r > 0 && i % 3 == 0)
+			trail_temp.r -= 1;
+		i++;
+	}
+	MemFree(trg_trail);
+
+}
+
 void draw_objects(void){
 	object *obj_it = objs;
 
@@ -40,6 +69,8 @@ void draw_objects(void){
 				* focal_length -3,(-2 * focal_length), LIGHTGRAY);
 		DrawCircleGradient(cords, obj_it->radius * (focal_length * 0.2),
 				obj_it->colors[0], obj_it->colors[1]);
+		if (trail)
+			draw_obj_trail(obj_it);
 		obj_it = obj_it->next;
 	}
 }

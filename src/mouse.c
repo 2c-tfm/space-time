@@ -3,7 +3,7 @@
 void handle_zoom(void) {
 	// if (focal_length < 20 && GetMouseWheelMove() < 0.0f)
 	// 	return;
-	focal_length += GetMouseWheelMove() * 10;
+	focal_length += GetMouseWheelMove() * 2;
 	if (focal_length < 0.1f) 
 		focal_length = 0.1f;
 }
