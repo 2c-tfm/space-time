@@ -10,8 +10,11 @@
 /// [x] - apply gravity on masses
 /// [x] - apply an orbit
 /// [x] - find out how to create unlimited space fabric
-/// [ ] - allow planets from a json file
-/// [ ] - init their velocity 
+/// [x] - allow planets from a json file
+/// [x] - init their velocity 
+/// [ ] - electro magnetic field of a planet
+/// [ ] - shine light wave
+/// [ ] - maybe emulate a star???/
 /////////////////////////////////// TODO ///////////////////////////////////
 
 ///////////////////////////////// includes /////////////////////////////////
@@ -19,10 +22,12 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <raylib.h>
 #include <string.h>
+#include <cJSON.h>
 
 
 #include "space.h"
@@ -44,8 +49,11 @@
 // mouse controls
 void handle_drag(void);
 void handle_zoom(void);
+// keyboard controls
+void handle_keys(void);
 ///////////////////////////////// functions ////////////////////////////////
 
+extern bool dspace;
 extern double focal_length;
 extern Vector2 cameraOffset;
 extern double alpha;

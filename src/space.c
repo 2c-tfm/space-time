@@ -40,12 +40,8 @@ void draw_objects(void){
 				* focal_length -3,(-2 * focal_length), LIGHTGRAY);
 		DrawCircleGradient(cords, obj_it->radius * (focal_length * 0.2),
 				obj_it->colors[0], obj_it->colors[1]);
-		printf("object [%s] px %lf py %lf pz %lf\n", obj_it->name,
-				obj_it->coords.x, obj_it->coords.y,
-				obj_it->coords.z);
 		obj_it = obj_it->next;
 	}
-
 }
 
 
@@ -60,11 +56,11 @@ void draw_space(void){
 	init.x = 0.00001f;
 	
 	(void) screen_range;
-	while (init.x < 40) {
+	while (init.x < 80) {
 		init.y = 0.00001f;
-		while (init.y < 40) {
+		while (init.y < 80) {
 			init.z = 0.00001f;
-			while (init.z < 40){
+			while (init.z < 80){
 				memcpy(pgrav, &init, sizeof(coord_3d));
 
 				apply_gravity_on_space(pgrav);

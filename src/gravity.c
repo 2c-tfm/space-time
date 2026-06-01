@@ -1,5 +1,23 @@
 #include <space_time.h>
 
+void calc_orbiter_velocity(object *obj, object *centralbody){
+	double dx = centralbody->coords.x - obj->coords.x;
+	double dy = centralbody->coords.y - obj->coords.y;
+	double dz = centralbody->coords.z - obj->coords.z;
+	double r = sqrt(dx*dx + dy*dy + dz*dz);
+
+	double orbital_speed = sqrt(GRAVITY_CONST * centralbody->mass / r);
+
+	double perp_x = -dz;  // 0
+	double perp_y = 0;
+	double perp_z = dx;   // -50
+	double perp_len = sqrt(perp_x*perp_x + perp_y*perp_y + perp_z*perp_z);
+
+	obj->velocity.x = (perp_x / perp_len) * orbital_speed;
+	obj->velocity.y = (perp_y / perp_len) * orbital_speed;
+	obj->velocity.z = (perp_z / perp_len) * orbital_speed;
+}
+
 /// shift_amount = G * M / r²
 void apply_gravity_on_space(coord_3d *point){
 	object *obj = objs;

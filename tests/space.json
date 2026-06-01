@@ -1,0 +1,26 @@
+{
+	"objects": [
+		{
+			"name": "phobos",
+			"mass": 1,
+			"radius": 2,
+			"coords": { "x": 30, "y": 0, "z": 0 },
+			"colors": [ "LIGHTGRAY", "DARKGRAY" ]
+		},
+		{
+			"name": "deimos",
+			"mass": 3,
+			"radius": 3,
+			"coords": { "x": 0, "y": 30, "z": 0 },
+			"colors": [ "DARKGRAY", "LIGHTGRAY" ]
+		},
+		{
+			"name": "mars",
+			"mass": 1000,
+			"radius": 7,
+			"coords": { "x": 40, "y": 40, "z": 40 },
+			"colors": [ "RED", "ORANGE"],
+			"secondaries": ["phobos", "deimos"]
+		}
+	]
+}

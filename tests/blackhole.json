@@ -1,0 +1,29 @@
+{
+  "objects": [
+	{
+		"name": "sun",
+		"mass": 1000,
+		"radius": 15,
+		"coords": { "x": 40, "y": 40, "z": 40 },
+		"colors": [ "YELLOW", "ORANGE" ],
+		"secondaries": [
+			"mercury",
+			"venus",
+			"earth",
+			"mars",
+			"jupiter",
+			"saturn",
+			"uranus",
+			"neptune"
+		]
+	},
+
+	{
+		"name": "black_hole",
+		"mass": 500000,
+		"radius": 6,
+		"coords": { "x": 30, "y": 0, "z": 0 },
+		"colors": [ "BLACK", "DARKGRAY" ]
+	}  
+  ]
+}

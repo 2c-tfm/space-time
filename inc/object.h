@@ -15,6 +15,7 @@ typedef struct object {
 
 extern object *objs;
 
-object *init_space_objects();
+void init_space_objects(char *cfg);
+void print_all_space_object();
 
 #endif

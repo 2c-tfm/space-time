@@ -11,8 +11,10 @@ void render_frame(void){
 		ClearBackground(BLACK);
 		handle_zoom();
 		handle_drag();
+		handle_keys();
 		info();
-		draw_space();
+		if (dspace)
+			draw_space();
 		draw_objects();
 		EndDrawing();
 	}
