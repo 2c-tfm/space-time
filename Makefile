@@ -2,8 +2,8 @@ CFLAGS = -Wall -Wextra -Werror -Wformat=2 -O3 -flto -ffast-math -pedantic
 CC = gcc
 NAME = space_time
 RAYLIB = libs/raylib/src/libraylib.a
-OBJ = build/main.o build/graphics.o build/space.o build/object.o build/mouse.o build/gravity.o build/keyboard.o
-SRC = src/main.c src/graphics.c src/space.c build/object.c src/mouse.c src/gravity.c src/keyboard.c
+OBJ = build/main.o build/graphics.o build/space.o build/object.o build/mouse.o build/gravity.o build/keyboard.o build/light.o build/console.o
+SRC = src/main.c src/graphics.c src/space.c build/object.c src/mouse.c src/gravity.c src/keyboard.c src/light.c src/console.c
 
 
 

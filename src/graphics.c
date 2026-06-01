@@ -8,14 +8,18 @@ void render_frame(void){
 	calc_all_objs_gforce();
 	while(!WindowShouldClose()){
 		BeginDrawing();
-		ClearBackground(BLACK);
 		handle_zoom();
 		handle_drag();
 		handle_keys();
 		info();
-		if (dspace)
-			draw_space();
-		draw_objects();
+		if (cons.open == false) {
+			ClearBackground(BLACK);
+			if (dspace)
+				draw_space();
+			draw_objects();
+		} else {
+			console_open();
+		}
 		EndDrawing();
 	}
 	CloseWindow();

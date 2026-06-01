@@ -14,7 +14,8 @@
 /// [x] - init their velocity 
 /// [X] - adding a trail for objects 
 /// [ ] - shine light wave (using mouse)
-////// [ ] - replace camera dragging control controls (SHIFT + mouse drag) instead of (mouse drag)
+////// [X] - replace camera dragging control controls (SHIFT + mouse drag) instead of (mouse drag)
+////// [ ] - find out the direction of the light using mouse movement (drag)
 /// [ ] - electro magnetic field of a planet
 /// [ ] - maybe emulate a star???/
 /// [ ] - add a menu for instructions
@@ -37,6 +38,8 @@
 #include "object.h"
 #include "graphics.h"
 #include "gravity.h"
+#include "light.h"
+#include "console.h"
 ///////////////////////////////// includes /////////////////////////////////
 
 

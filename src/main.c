@@ -35,12 +35,16 @@ int main(int argc, char **argv){
 		puts("cannot read config file, exiting");
 		exit(EXIT_FAILURE);
 	}
+	// initializing the console
+	memset(&cons.cline, 0, MAX_LINE);
+	memset(&cons.clog, 0, MAX_LINE * MAX_CLOG);
+
 	init_space_objects(cfg);
-	print_all_space_object();
 
 	InitWindow(WIN_X, WIN_Y, WIN_NAME);
 	SetTargetFPS(60);
 
+	SetExitKey(KEY_NULL);
 	theta = atan(1/sqrt(2));
 
 	render_frame();

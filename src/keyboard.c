@@ -7,6 +7,10 @@ void handle_keys(void){
 		dspace = !dspace;
 	}
 
+	if (IsKeyPressed(KEY_ESCAPE)) {
+		cons.open = !cons.open;
+	}
+
 	if (IsKeyPressed(KEY_T)) {
 		trail = !trail;
 	}
