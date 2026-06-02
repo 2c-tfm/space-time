@@ -13,11 +13,12 @@
 /// [x] - allow planets from a json file
 /// [x] - init their velocity 
 /// [X] - adding a trail for objects 
-/// [ ] - shine light wave (using mouse)
-////// [X] - replace camera dragging control controls (SHIFT + mouse drag) instead of (mouse drag)
-////// [ ] - find out the direction of the light using mouse movement (drag)
+/// [ ] - create a console
+////// [ ] - show command logs
+////// [ ] - navigate commands using arrow keys
+////// [ ] - show time
 /// [ ] - electro magnetic field of a planet
-/// [ ] - maybe emulate a star???/
+/// [ ] - maybe emulate a star???
 /// [ ] - add a menu for instructions
 /////////////////////////////////// TODO ///////////////////////////////////
 
@@ -25,6 +26,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <unistd.h>

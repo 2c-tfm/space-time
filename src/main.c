@@ -37,7 +37,7 @@ int main(int argc, char **argv){
 	}
 	// initializing the console
 	memset(&cons.cline, 0, MAX_LINE);
-	memset(&cons.clog, 0, MAX_LINE * MAX_CLOG);
+	memset(&cons.log, 0, MAX_LINE * MAX_LOG);
 
 	init_space_objects(cfg);
 

@@ -11,7 +11,6 @@ void handle_zoom(void) {
 void handle_drag(void){
 	static bool dragging = false;
 	static Vector2 prevMousePos = {0, 0};
-	static Vector2 dragDelta = {0, 0};
 
 	Vector2 mousePos = GetMousePosition();
 
@@ -22,7 +21,6 @@ void handle_drag(void){
 
         if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
 		dragging = false;
-		dragDelta = (Vector2){0, 0};
         }
 
         if (dragging && IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
@@ -39,7 +37,6 @@ void handle_drag(void){
 
         if (IsMouseButtonReleased(MOUSE_BUTTON_RIGHT)) {
 		dragging = false;
-		dragDelta = (Vector2){0, 0};
         }
 
         if (dragging && IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {

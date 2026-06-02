@@ -15,8 +15,8 @@ ifeq ($(UNAME_S),Darwin)
 	PLATFORM_LIBS = -Wl,-rpath,$(PWD)/libs/cJSON/build -Llibs/cJSON/build -framework Cocoa -framework IOKit -framework CoreVideo -framework OpenGL -lcjson 
 	LIBCJSON = libs/cJSON/build/libcjson.dylib
 else
-	PLATFORM_LIBS = -lGL -lm -ldl -lpthread -lX11
-	LIBCJSON = libs/cJSON/build/libcjson.a
+	PLATFORM_LIBS = -lGL -lm -lmvec -ldl -lpthread -lX11 -L$(PWD)/libs/cJSON/build
+	LIBCJSON = libs/cJSON/build/libcjson.so
 endif
 
 all: build $(NAME)
