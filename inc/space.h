@@ -2,6 +2,7 @@
 #define SPACE_H
 
 extern double theta;
+extern bool pause_siml;
 
 ///////////////////////////////// structs /////////////////////////////////
 

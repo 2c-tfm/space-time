@@ -30,7 +30,8 @@ void console_open(void);
 			"del_obj <name> - deletes the object from current space\n" \
 			"pause - pauses the simulation\n" \
 			"resume - resumes the simulation\n" \
-			"clear - clears message logs\n"
+			"clear - clears message logs\n" \
+			"exit - exits\n" \
 
 
 

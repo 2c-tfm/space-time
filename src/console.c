@@ -90,7 +90,6 @@ static void console_println(char *msg){
 			} else 
 				cons.logtime[cons.log_it] = 0;
 			memcpy(cons.log[cons.log_it], nl_ptr, strchr(nl_ptr, '\n') - nl_ptr);
-			puts(cons.log[cons.log_it]);
 			nl_ptr = strchr(nl_ptr, '\n') + 1;
 			cons.log_it++;
 		}
@@ -112,8 +111,12 @@ static inline bool missing_arg(char *s) {
 
 static void console_parse_object(char *cmd) {
 	object tmp_obj;
+	object *nobj;
+	char *color;
+	double values[6];
+	int8_t i = -1;
 
-	(void)tmp_obj;
+	memset(&tmp_obj, 0, sizeof(object));
 	// just command without parameters
 	if (strchr(cmd, ' ') == NULL){
 		console_println("No arguments provided to add_obj");
@@ -123,19 +126,112 @@ static void console_parse_object(char *cmd) {
 	// parsing the object name
 	cmd = strchr(cmd, ' ');
 	skip_spaces(&cmd);
-	if (missing_arg(cmd) == false)
+	if (missing_arg(cmd) == true)
 		return;
+
 
 	// paranoia
 	if (strchr(cmd, ' ') == NULL){
 		console_println("No arguments provided to add_obj");
 		return ;
 	}
-	
-	// tmp_obj = malloc(strchr(cmd - 	) - cmd)
 
 	
+	uint32_t strl = strchr(cmd, ' ') - cmd;
+	tmp_obj.name = MemAlloc(strl + 1);
+	memcpy(tmp_obj.name, cmd, strl);
+	tmp_obj.name[strl] = '\0';
 	
+
+
+	while (++i < 5){
+		// parsing mass and radius
+		cmd = strchr(cmd, ' ');
+		skip_spaces(&cmd);
+		if (missing_arg(cmd) == true)
+			return;
+		values[i] = atof(cmd);
+	}
+	tmp_obj.mass = (uint64_t) values[0];
+	tmp_obj.radius = values[1];
+	tmp_obj.coords.x =  values[2];
+	tmp_obj.coords.y =  values[3];
+	tmp_obj.coords.z =  values[4];
+	
+	// parsing colors
+	cmd = strchr(cmd, ' ');
+	skip_spaces(&cmd);
+	if (missing_arg(cmd) == true)
+		return;
+
+	strl = strchr(cmd, ' ') - cmd;
+	color = MemAlloc(strl + 1);
+	memcpy(color, cmd, strl);
+	color[strl] = '\0';
+	tmp_obj.colors[0] = color_from_name(color);
+	printf("first color %s\n", color);
+	MemFree(color);
+
+	cmd = strchr(cmd, ' ');
+	skip_spaces(&cmd);
+	if (missing_arg(cmd) == true)
+		return;
+
+	tmp_obj.colors[1] = color_from_name(cmd);
+
+	// linking it
+	nobj = MemAlloc(sizeof(object));
+	memcpy(nobj, &tmp_obj, sizeof(object));
+	nobj->next = objs;
+	objs = nobj;
+	console_println("Object added");
+}
+
+static void console_fabric(char *s){
+	s = strchr(s, ' ');
+	skip_spaces(&s);
+	if (missing_arg(s) == true)
+		return;
+
+	if (strncmp(s, "on", strlen("on")) == 0) {
+		dspace = true;
+	} else if (strncmp(s, "off", strlen("off")) == 0) {
+		dspace = false;
+	} else {
+		console_println("Unknown argument");
+	}
+}
+
+static void console_del_obj(char *s){
+	object *prev_obj = objs;
+	object *obj_it = objs;
+	bool found = false;
+
+	s = strchr(s, ' ');
+	skip_spaces(&s);
+	if (missing_arg(s) == true)
+		return;
+	
+	while (obj_it != NULL) {
+		if (strncmp(obj_it->name, s, strlen(obj_it->name)) == 0){
+			// handle first node
+			if (prev_obj == obj_it) 
+				objs = obj_it->next;
+			else 
+				prev_obj->next = obj_it->next;
+			MemFree(obj_it->name);
+			MemFree(obj_it);
+			found = true;
+		}
+
+		prev_obj = obj_it;
+		obj_it = obj_it->next;
+	}
+	if (found == false)
+		console_println("Object not found");
+	else 
+		console_println("Object deleted");
+
 }
 
 // processing the command to the command line
@@ -145,12 +241,24 @@ static void console_process_line(){
 	console_println(cons.cline);
 
 	// here is where we treat the command
-	if (strcmp(line, "help") == 0){
+	if (strncmp(line, "help", strlen("help")) == 0){
 		console_println(CONS_HELP);
-	} else if (strcmp(line, "clear") == 0) {
+	} else if (strncmp(line, "clear", strlen("clear")) == 0) {
 		console_clear();
-	} else if (strcmp(line, "add_obj") == 0) {
+	} else if (strncmp(line, "add_obj", strlen("add_obj")) == 0) {
 		console_parse_object(line);
+	} else if (strncmp(line, "exit", strlen("exit")) == 0) {
+		exit(EXIT_SUCCESS);
+	} else if (strncmp(line, "fabric", strlen("fabric")) == 0) {
+		console_fabric(line);
+	} else if (strncmp(line, "del_obj", strlen("del_obj")) == 0) {
+		console_del_obj(line);
+	} else if (strncmp(line, "pause", strlen("pause")) == 0) {
+		pause_siml = true;
+		console_println("Simulation paused");
+	} else if (strncmp(line, "resume", strlen("resume")) == 0) {
+		pause_siml = false;
+		console_println("Simulation resumed");
 	} else 
 		console_println("Unknown command, ignoring");
 	

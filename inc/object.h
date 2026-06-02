@@ -15,6 +15,7 @@ typedef struct object {
 
 extern object *objs;
 
+Color color_from_name(char *name);
 void init_space_objects(char *cfg);
 void print_all_space_object();
 

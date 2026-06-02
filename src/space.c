@@ -2,6 +2,7 @@
 
 bool trail = true;
 
+bool pause_siml = false;
 double focal_length = 60;
 Vector2 cameraOffset = {0, 0};
 double theta ;
@@ -58,7 +59,8 @@ void draw_objects(void){
 	object *obj_it = objs;
 
 	calc_all_objs_gforce();
-	obj_update_coords_via_accel();
+	if (pause_siml == false)
+		obj_update_coords_via_accel();
 
 	// iterating over objects to draw
 	while (obj_it != NULL) {
