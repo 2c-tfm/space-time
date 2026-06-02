@@ -88,7 +88,7 @@ static void print_space_object(object *obj){
 	printf(
 			"Space object [%s]\n"
 			"\t\tMass [%lf]\n"
-			"\t\tradius [%ld]\n"
+			"\t\tradius [%lld]\n"
 			"\t\tacceleration x:[%lf] y:[%lf] z:[%lf]\n"
 			"\t\tvelocity x:[%lf] y:[%lf] z:[%lf]\n",
 			obj->name, obj->mass, obj->radius,

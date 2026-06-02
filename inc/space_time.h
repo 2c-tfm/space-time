@@ -14,9 +14,13 @@
 /// [x] - init their velocity 
 /// [X] - adding a trail for objects 
 /// [ ] - create a console
-////// [ ] - show command logs
 ////// [ ] - navigate commands using arrow keys
-////// [ ] - show time
+////// [ ] - fix the logs overflow problem
+////// [ ] - print answers with a diffrent color indicating status
+////// [ ] - add secondaries in add_obj command
+////// [ ] - once we hit limit console auto clear
+////// [X] - show command logs
+////// [x] - show time
 /// [ ] - electro magnetic field of a planet
 /// [ ] - maybe emulate a star???
 /// [ ] - add a menu for instructions
