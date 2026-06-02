@@ -91,7 +91,7 @@ static void print_space_object(object *obj){
 			"\t\tradius [%lld]\n"
 			"\t\tacceleration x:[%lf] y:[%lf] z:[%lf]\n"
 			"\t\tvelocity x:[%lf] y:[%lf] z:[%lf]\n",
-			obj->name, obj->mass, obj->radius,
+			obj->name, obj->mass, (long long int)obj->radius,
 			obj->acceleration.x, obj->acceleration.y,
 			obj->acceleration.z, 
 			obj->velocity.x, obj->velocity.y, obj->velocity.z
