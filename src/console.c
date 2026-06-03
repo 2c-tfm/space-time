@@ -234,6 +234,43 @@ static void console_del_obj(char *s){
 
 }
 
+static void console_cast_photon(char *cmd){
+	coord_3d init;
+	double h_ang, v_ang;
+	coord_3d direct;
+	double *coords[5] = {
+		&init.x, &init.y, &init.z, 
+		&h_ang, &v_ang, 
+	};
+	int8_t i = -1;
+
+	if (strchr(cmd, ' ') == NULL){
+		console_println("No arguments provided to add_obj");
+		return ;
+	}
+
+	while (++i < 5) {
+		// parsing the object name
+		cmd = strchr(cmd, ' ');
+		skip_spaces(&cmd);
+		if (missing_arg(cmd) == true)
+			return;
+		*coords[i] = atof(cmd);
+	}
+	// x and y
+	if (h_ang < 0 || h_ang > 360) {
+		console_println("horizontal angle out of range [0 - 360]");
+	} 
+	// z
+	if (v_ang > 90 || v_ang < -90) {
+		console_println("vertical angle out of range [-90 - 90]");
+	}
+	console_println("Shooting photon");
+	direct.x = cos(v_ang) * cos(h_ang);
+	direct.y = cos(v_ang) * sin(h_ang);
+	direct.z = cos(v_ang);
+}
+
 // processing the command to the command line
 static void console_process_line(){
 	char *line = cons.cline;
@@ -259,6 +296,8 @@ static void console_process_line(){
 	} else if (strncmp(line, "resume", strlen("resume")) == 0) {
 		pause_siml = false;
 		console_println("Simulation resumed");
+	} else if (strncmp(line, "cast_photon", strlen("cast_photon")) == 0) {
+		console_cast_photon(line);
 	} else 
 		console_println("Unknown command, ignoring");
 	

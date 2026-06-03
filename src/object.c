@@ -63,6 +63,7 @@ object *init_space_elem(cJSON *elem){
 			obj->colors[1] = color_from_name(c1->valuestring);
 	}
 
+	obj->type = PRIMARY;
 	entry = cJSON_GetObjectItem(elem, "secondaries");
 	if (cJSON_IsArray(entry)) {
 		uint32_t scount = cJSON_GetArraySize(entry);
@@ -75,6 +76,7 @@ object *init_space_elem(cJSON *elem){
 				i++;
 				continue;
 			}
+			secondary->type = SECONDARY;
 			calc_orbiter_velocity(secondary, obj);
 			i++;
 		}

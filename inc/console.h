@@ -28,6 +28,7 @@ void console_open(void);
 			"fabric [on/off] - [enables/disables] the fabric of space\n" \
 			"add_obj <name> <mass> <radius> <x> <y> <z> <outer_color> <inner_color> - adds an object to the current space\n" \
 			"del_obj <name> - deletes the object from current space\n" \
+			"cast_photon <ix> <iy> <iz> <hang> <vang> - cast photon from i* and direct's it using horizontal angle (azimuth) and vertical angle (elevation)\n" \
 			"pause - pauses the simulation\n" \
 			"resume - resumes the simulation\n" \
 			"clear - clears message logs\n" \

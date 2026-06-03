@@ -13,11 +13,11 @@
 /// [x] - allow planets from a json file
 /// [x] - init their velocity 
 /// [X] - adding a trail for objects 
-/// [ ] - create a console
+/// [X] - create a console
 ////// [ ] - navigate commands using arrow keys
 ////// [ ] - fix the logs overflow problem
 ////// [ ] - print answers with a diffrent color indicating status
-////// [ ] - add secondaries in add_obj command
+////// [ ] - add secondaries command
 ////// [ ] - once we hit limit console auto clear
 ////// [X] - show command logs
 ////// [x] - show time

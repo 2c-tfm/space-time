@@ -1,6 +1,11 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
+typedef enum OBJTYPE {
+	PRIMARY,		// primary object "orbits nothing for the sake of the simulation"
+	SECONDARY,		// secondary object to some primary, "orbits an object"
+	PHOTON			// zero mass, zero velocity, high speed
+} OBJTYPE;
 
 typedef struct object {
 	char *name;
@@ -10,6 +15,7 @@ typedef struct object {
 	struct coord_3d velocity;
 	struct coord_3d coords;
 	struct Color colors[2];
+	OBJTYPE type;
 	struct object *next;			// might change this later
 } object;
 
