@@ -31,9 +31,9 @@ void check_photon_intersection(object *photon){
 
 	while (obj_it != NULL){
 		if (
-			(int64_t)photon->coords.x == (int64_t)photon->coords.x && 
-			(int64_t)photon->coords.y == (int64_t)photon->coords.y && 
-			(int64_t)photon->coords.z == (int64_t)photon->coords.z
+			(int64_t)photon->coords.x == (int64_t)obj_it->coords.x && 
+			(int64_t)photon->coords.y == (int64_t)obj_it->coords.y && 
+			(int64_t)photon->coords.z == (int64_t)obj_it->coords.z
 				)
 			photon->active = false;
 		obj_it = obj_it->next;
