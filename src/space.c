@@ -57,9 +57,9 @@ static void draw_obj_trail(object *target){
 void draw_objects(void){
 	object *obj_it = objs;
 
-	calc_all_objs_gforce();
 
 	if (pause_siml == false){
+		calc_all_objs_gforce();
 		obj_update_coords_via_accel();
 	}
 

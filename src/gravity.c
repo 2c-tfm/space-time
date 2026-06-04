@@ -11,6 +11,13 @@ void calc_orbiter_velocity(object *obj, object *centralbody){
 	double perp_x = -dz;  // 0
 	double perp_y = 0;
 	double perp_z = dx;   // -50
+	
+	if (dx == 0 && dz == 0) {
+		perp_x = dy;
+		perp_y = -dx;
+		perp_z = 0;
+	}
+
 	double perp_len = sqrt(perp_x*perp_x + perp_y*perp_y + perp_z*perp_z);
 
 	obj->velocity.x = (perp_x / perp_len) * orbital_speed;
@@ -19,6 +26,7 @@ void calc_orbiter_velocity(object *obj, object *centralbody){
 }
 
 /// shift_amount = G * M / r²
+/// newtonian deflection
 void apply_gravity_on_space(coord_3d *point){
 	object *obj = objs;
 	double total_dx = 0;

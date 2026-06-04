@@ -152,8 +152,8 @@ static void console_parse_object(char *cmd) {
 			return;
 		values[i] = atof(cmd);
 	}
-	tmp_obj.mass = (uint64_t) values[0];
-	tmp_obj.radius = values[1];
+	tmp_obj.mass = values[0];
+	tmp_obj.radius = (uint64_t) values[1];
 	tmp_obj.coords.x =  values[2];
 	tmp_obj.coords.y =  values[3];
 	tmp_obj.coords.z =  values[4];
