@@ -83,6 +83,7 @@ object *init_space_elem(cJSON *elem){
 	} else {
 		puts("secondary objects must be in an array containing the name of orbiting objects");
 	}
+	obj->active = true;
 	return (obj);
 }
 
@@ -108,6 +109,13 @@ void print_all_space_object(){
 		print_space_object(obj_it);
 		obj_it = obj_it->next;
 	}
+}
+
+void add_space_object(object *new){
+	if (new == NULL)
+		return ;
+	new->next = objs;
+	objs = new;
 }
 
 void init_space_objects(char *cfg){

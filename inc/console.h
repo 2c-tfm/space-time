@@ -36,4 +36,7 @@ void console_open(void);
 
 
 
+void console_println(char *msg);
+
+
 #endif

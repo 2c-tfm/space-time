@@ -73,7 +73,7 @@ static bool console_input_box(void){
 	return (false);
 }
 
-static void console_println(char *msg){
+void console_println(char *msg){
 	char *nl_ptr = msg;
 	bool firstnl_line = true;
 
@@ -182,8 +182,7 @@ static void console_parse_object(char *cmd) {
 	// linking it
 	nobj = MemAlloc(sizeof(object));
 	memcpy(nobj, &tmp_obj, sizeof(object));
-	nobj->next = objs;
-	objs = nobj;
+	add_space_object(nobj);
 	console_println("Object added");
 }
 
@@ -236,8 +235,8 @@ static void console_del_obj(char *s){
 
 static void console_cast_photon(char *cmd){
 	coord_3d init;
+	coord_3d acc;
 	double h_ang, v_ang;
-	coord_3d direct;
 	double *coords[5] = {
 		&init.x, &init.y, &init.z, 
 		&h_ang, &v_ang, 
@@ -265,10 +264,10 @@ static void console_cast_photon(char *cmd){
 	if (v_ang > 90 || v_ang < -90) {
 		console_println("vertical angle out of range [-90 - 90]");
 	}
-	console_println("Shooting photon");
-	direct.x = cos(v_ang) * cos(h_ang);
-	direct.y = cos(v_ang) * sin(h_ang);
-	direct.z = cos(v_ang);
+	acc.x = cos(v_ang) * cos(h_ang);
+	acc.y = cos(v_ang) * sin(h_ang);
+	acc.z = cos(v_ang);
+	space_cast_photon(&init, &acc);
 }
 
 // processing the command to the command line

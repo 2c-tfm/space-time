@@ -9,7 +9,7 @@ double theta ;
 double alpha =  M_PI / 4.0;
 
 // orthographic_projection - projects a 3d point onto a 2d plane
-static coord_2d orthographic_projection(coord_3d *coord) {
+coord_2d orthographic_projection(coord_3d *coord) {
 
 	double px = coord->x * cos(alpha) + coord->z * sin(alpha);
 	double pz = -coord->x * cos(alpha) + coord->z * sin(alpha);
@@ -52,15 +52,16 @@ static void draw_obj_trail(object *target){
 		i++;
 	}
 	MemFree(trg_trail);
-
 }
 
 void draw_objects(void){
 	object *obj_it = objs;
 
 	calc_all_objs_gforce();
-	if (pause_siml == false)
+
+	if (pause_siml == false){
 		obj_update_coords_via_accel();
+	}
 
 	// iterating over objects to draw
 	while (obj_it != NULL) {
@@ -71,8 +72,11 @@ void draw_objects(void){
 				* focal_length -3,(-2 * focal_length), LIGHTGRAY);
 		DrawCircleGradient(cords, obj_it->radius * (focal_length * 0.2),
 				obj_it->colors[0], obj_it->colors[1]);
-		if (trail)
+		if ((obj_it->type == PRIMARY || obj_it->type == SECONDARY) && trail)
 			draw_obj_trail(obj_it);
+		if (obj_it->type == PHOTON && pause_siml == false) {
+			space_update_photon(obj_it);
+		}
 		obj_it = obj_it->next;
 	}
 }

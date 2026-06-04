@@ -16,6 +16,7 @@ typedef struct object {
 	struct coord_3d coords;
 	struct Color colors[2];
 	OBJTYPE type;
+	bool active;
 	struct object *next;			// might change this later
 } object;
 
@@ -24,5 +25,6 @@ extern object *objs;
 Color color_from_name(char *name);
 void init_space_objects(char *cfg);
 void print_all_space_object();
+void add_space_object(object *new);
 
 #endif

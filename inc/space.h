@@ -22,5 +22,7 @@ typedef struct coord_2d {
 
 void draw_objects(void);
 void draw_space(void);
+void print_all_space_object();
+coord_2d orthographic_projection(coord_3d *coord);
 
 #endif

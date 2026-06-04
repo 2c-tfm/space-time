@@ -44,8 +44,8 @@
 #include "object.h"
 #include "graphics.h"
 #include "gravity.h"
-#include "light.h"
 #include "console.h"
+#include "light.h"
 ///////////////////////////////// includes /////////////////////////////////
 
 

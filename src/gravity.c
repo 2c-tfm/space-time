@@ -56,6 +56,7 @@ void obj_update_coords_via_accel(){
 		obj_it->coords.x += obj_it->velocity.x * PHYSICS_DT;
 		obj_it->coords.y += obj_it->velocity.y * PHYSICS_DT;
 		obj_it->coords.z += obj_it->velocity.z * PHYSICS_DT;
+
 		obj_it = obj_it->next;
 	}
 }
@@ -98,7 +99,8 @@ void calc_all_objs_gforce(void){
 	object *obj_it = objs;
 
 	while (obj_it != NULL){
-		calc_objs_gforce(obj_it);
+		if (obj_it->type == PRIMARY || obj_it->type == SECONDARY)
+			calc_objs_gforce(obj_it);
 		obj_it = obj_it->next;
 	}
 }
