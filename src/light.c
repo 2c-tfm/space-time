@@ -31,8 +31,8 @@ void space_update_photon(object *photon){
 	coord_3d g_vec;		// gravity bending vector
 	
 	memcpy(&point, &photon->coords, sizeof(coord_3d));
-	apply_gravity_on_space(&point);				// TODO : needs to be changed to photon
-	
+	apply_gravity_on_space(&point);
+
 	g_vec.x = point.x - photon->coords.x;
 	g_vec.y = point.y - photon->coords.y;
 	g_vec.z = point.z - photon->coords.z;
