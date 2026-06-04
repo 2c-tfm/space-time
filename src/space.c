@@ -65,17 +65,19 @@ void draw_objects(void){
 
 	// iterating over objects to draw
 	while (obj_it != NULL) {
-		coord_2d proj = orthographic_projection(&obj_it->coords);
-		Vector2 cords = {proj.x, proj.y};
-		DrawText(obj_it->name, proj.x - obj_it->radius * 
-				(focal_length * 1.2),proj.y - obj_it->radius
-				* focal_length -3,(-2 * focal_length), LIGHTGRAY);
-		DrawCircleGradient(cords, obj_it->radius * (focal_length * 0.2),
-				obj_it->colors[0], obj_it->colors[1]);
-		if ((obj_it->type == PRIMARY || obj_it->type == SECONDARY) && trail)
-			draw_obj_trail(obj_it);
-		if (obj_it->type == PHOTON && pause_siml == false) {
-			space_update_photon(obj_it);
+		if (obj_it->active == true){
+			coord_2d proj = orthographic_projection(&obj_it->coords);
+			Vector2 cords = {proj.x, proj.y};
+			DrawText(obj_it->name, proj.x - obj_it->radius * 
+					(focal_length * 1.2),proj.y - obj_it->radius
+					* focal_length -3,(-2 * focal_length), LIGHTGRAY);
+			DrawCircleGradient(cords, obj_it->radius * (focal_length * 0.2),
+					obj_it->colors[0], obj_it->colors[1]);
+			if ((obj_it->type == PRIMARY || obj_it->type == SECONDARY) && trail)
+				draw_obj_trail(obj_it);
+			if (obj_it->type == PHOTON && pause_siml == false) {
+				space_update_photon(obj_it);
+			}
 		}
 		obj_it = obj_it->next;
 	}

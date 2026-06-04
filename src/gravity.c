@@ -57,6 +57,11 @@ void obj_update_coords_via_accel(){
 	object *obj_it = objs;
 
 	while (obj_it != NULL){
+		if (obj_it->active == false){
+			obj_it = obj_it->next;
+			continue;
+		}
+
 		obj_it->velocity.x += obj_it->acceleration.x * PHYSICS_DT;
 		obj_it->velocity.y += obj_it->acceleration.y * PHYSICS_DT;
 		obj_it->velocity.z += obj_it->acceleration.z * PHYSICS_DT;

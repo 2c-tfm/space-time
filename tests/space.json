@@ -16,7 +16,7 @@
 		},
 		{
 			"name": "mars",
-			"mass": 40,
+			"mass": 40000,
 			"radius": 7,
 			"coords": { "x": 90, "y": 90, "z": 90 },
 			"colors": [ "RED", "ORANGE"],

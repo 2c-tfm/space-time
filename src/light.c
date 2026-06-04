@@ -26,7 +26,24 @@
 // 	point->z += total_dz;
 // }
 
+void check_photon_intersection(object *photon){
+	object *obj_it = objs;
+
+	while (obj_it != NULL){
+		if (
+			(int64_t)photon->coords.x == (int64_t)photon->coords.x && 
+			(int64_t)photon->coords.y == (int64_t)photon->coords.y && 
+			(int64_t)photon->coords.z == (int64_t)photon->coords.z
+				)
+			photon->active = false;
+		obj_it = obj_it->next;
+	}
+
+}
+
 void space_update_photon(object *photon){
+	if (photon->active == false)
+		return;
 	coord_3d point;		// before bending
 	coord_3d g_vec;		// gravity bending vector
 	
@@ -55,6 +72,8 @@ void space_update_photon(object *photon){
 	photon->coords.x += photon->velocity.x;
 	photon->coords.y += photon->velocity.y;
 	photon->coords.z += photon->velocity.z;
+	// checks if we intersected with any object
+	check_photon_intersection(photon);
 }
 
 void space_cast_photon(coord_3d *pcoords, coord_3d *direction) {
